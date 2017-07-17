@@ -87,6 +87,14 @@ public class APIsSteps extends BasicTestObject {
 		apiPage.clickOperator(arg1);
 	}
 
+	@When("^I select application as \"([^\"]*)\"$")
+	public void i_select_application_as(String arg1) throws Throwable {
+		APIsPage apiPage = new APIsPage(driver);
+		String appName = config.getValue(arg1);
+		Thread.sleep(sleepTime);
+		apiPage.clickOperator(appName);
+	}
+	
 	@When("^I click apimanager \"([^\"]*)\" API page subscribe button$")
 	public void i_click_apimanager_API_page_subscribe_button(String arg1) throws Throwable {
 		APIsPage apiPage = new APIsPage(driver);
@@ -110,7 +118,8 @@ public class APIsSteps extends BasicTestObject {
 	@Then("^I should search apimanager API \"([^\"]*)\"$")
 	public void i_should_search_apimanager_API(String arg1) throws Throwable {
 		APIsPage apiPage = new APIsPage(driver);
-		apiPage.enterAPINameSearch(config.getValue(arg1));
+		apiPage.enterAPINameSearch(arg1.trim());
+//		apiPage.enterAPINameSearch(config.getValue(arg1));
 		Thread.sleep(1000);
 		apiPage.clickSearch();
 	}

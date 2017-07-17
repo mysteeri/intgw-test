@@ -5,10 +5,10 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-
 @CucumberOptions(plugin = { "pretty","html:target/cucumber-html-report","json:target/cucumber-report.json" },
 		 features = {
-		"src/test/resources/feature/"
+	/*	"src/test/resources/feature/",*/
+		"src/test/resources/feature/hub-2.0.0/Dialog-AllStepsBySequense2.feature"
 },
 glue={
 		"com.wso2telco.tests.apimanager.base",
@@ -20,9 +20,11 @@ glue={
 		"com.wso2telco.tests.apimanager.steps.mailinator"
 },
 tags = {
-		//"@smoke"
-        //"@BarFileUpload"
-		"@runnerAllsteps"
+		
+//		"@runnerAllsteps",
+//		"@createSpsteps",
+//		"@addminApproveSteps",
+		"@spSubscribeForAPI"
 }
 )
 public class RunCukesTest {

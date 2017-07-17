@@ -27,14 +27,7 @@ Feature: Create SP and Add New Application
     Then I should see the status as "PUBLISHED"
     Examples:
       |usertypePub|apiName      |version|context        |prodEndpoint                   |sandboxEndpoint                |ApiTier                                                               |
-       |PUBLISHER  |paymentWso2T10      |v1     |paymentwso2T10    |http://172.26.76.70:8280/payment |http://172.26.76.70:8280/payment |Unlimited,Default,Requestbased,Silver,Subscription,Premium,Bronze|
-   #   |PUBLISHER  |ussd         |v1     |ussd        |http://localhost:8281/ussd/v1     |http://localhost:8181/ussd/v1|Unlimited,Default,Requestbased,Silver,Subscription,Gold,Premium,Bronze|
-   #   |PUBLISHER  |location     |v1     |location     |http://localhost:8281/location/v1|http://localhost:8181/location/v1|Unlimited,Default,Requestbased,Silver,Subscription,Gold,Premium,Bronze|
-   #   |PUBLISHER  |smsmessaging |v1     |smsmessaging|http://localhost:8281/smsmessaging/v1|http://localhost:8181/smsmessaging/v1|Unlimited,Default,Requestbased,Silver,Subscription,Gold,Premium,Bronze|
-   #   |PUBLISHER  |credit       |v1     |credit      |http://localhost:8281/credit/v1|http://localhost:8181/credit/v1|Unlimited,Default,Requestbased,Silver,Subscription,Gold,Premium,Bronze|
-   #   |PUBLISHER  |wallet       |v1     |wallet      |http://localhost:8281/wallet/v1|http://localhost:8181/wallet/v1|Unlimited,Default,Requestbased,Silver,Subscription,Gold,Premium,Bronze|
-   #   |PUBLISHER  |provisioning |v1     |provisioning|http://localhost:8281/provisioning/v1|http://localhost:8181/provisioning/v1|Unlimited,Default,Requestbased,Silver,Subscription,Gold,Premium,Bronze|
-   #   |PUBLISHER  |customerinfo |v1     |customerinfo|http://localhost:8281/customerinfo/v1|http://localhost:8181/customerinfo/v1|Unlimited,Default,Requestbased,Silver,Subscription,Gold,Premium,Bronze|
+       |PUBLISHER  |paymentWso2T11      |v1     |paymentwso2T11    |http://172.26.76.70:8280/payment |http://172.26.76.70:8280/payment |Unlimited,Default,Requestbased,Silver,Subscription,Premium,Bronze|
  
   @createSpsteps
   Scenario Outline: Create SP and Add New Application
