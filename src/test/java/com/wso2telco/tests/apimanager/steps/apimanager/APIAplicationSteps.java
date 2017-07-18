@@ -38,11 +38,13 @@ public class APIAplicationSteps extends BasicTestObject {
 */
 	@Then("^I delete existing \"([^\"]*)\"$")
 	public void i_delete_existing(String arg1) throws Throwable {
+		final long deleteTime =sleepTime/5;
 		ApplicationsPage apppage = new ApplicationsPage(driver);
 		if (apppage.isAppAvailable(config.getValue(arg1))) {
 			apppage.clickDelete(config.getValue(arg1));
+			Thread.sleep(deleteTime);
 		}
-		Thread.sleep(sleepTime);
+		
 	}
 
 /*	
@@ -68,7 +70,7 @@ public class APIAplicationSteps extends BasicTestObject {
 //
 //			config.setValue(arg1, appName);
 //		}
-		apppage.enterAppllicationName(config.getValue(arg1));
+		apppage.enterAppllicationName(config.getValue(arg1.trim()));
 		Thread.sleep(sleepTime);
 		apppage.enterAppllicationDescription(arg2);
 		Thread.sleep(sleepTime);
@@ -121,13 +123,33 @@ public class APIAplicationSteps extends BasicTestObject {
 	public void i_should_see_the_confirm_delete_popup_with(String arg1) throws Throwable {
 		ApplicationsPage apppage = new ApplicationsPage(driver);
 		Assert.assertTrue(apppage.isConfirmDeleteMessage(arg1));
+	
 	}
 
+	@Then("^I should see the confirm delete popup with \"([^\"]*)\" for \\\"([^\\\"]*)\\\"$")
+	public void doConfirmDeleteIfExists(String arg1,String arg2) throws Throwable {
+		ApplicationsPage apppage = new ApplicationsPage(driver);
+		if(apppage.isAppAvailable(arg2)) {
+			Assert.assertTrue(apppage.isConfirmDeleteMessage(arg1));
+		}
+	}
+	
 	@Then("^I click on confirm delete popup Yes button$")
 	public void i_click_on_confirm_delete_popup_Yes_button() throws Throwable {
 		ApplicationsPage apppage = new ApplicationsPage(driver);
 		apppage.clickYes();
 	}
+	
+	@Then("^I click on confirm delete popup Yes button for \\\"([^\\\"]*)\\\"$")
+	public void doConfirmDeletePopupYesButtonIfExists(String arg2) throws Throwable {
+		ApplicationsPage apppage = new ApplicationsPage(driver);
+		try {
+			apppage.clickYes();
+		} catch (Exception e) {
+			System.out.println("No application found");
+		}
+	}
+	
 /*  TODO: Need to try this method in more specific way.
 	@Then("^I should see the Duplicate Application error pop up with \"([^\"]*)\"\"([^\"]*)\"$")
 	public void i_should_see_the_Duplicate_Application_error_pop_up_with(String arg1) throws Throwable {

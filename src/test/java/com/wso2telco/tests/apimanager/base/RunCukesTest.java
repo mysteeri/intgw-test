@@ -8,7 +8,8 @@ import cucumber.api.junit.Cucumber;
 @CucumberOptions(plugin = { "pretty","html:target/cucumber-html-report","json:target/cucumber-report.json" },
 		 features = {
 	/*	"src/test/resources/feature/",*/
-		"src/test/resources/feature/hub-2.0.0/Dialog-AllStepsBySequense2.feature"
+		"src/test/resources/feature/InternalGatewayFlow_Type2.feature"
+//		"src/test/resources/feature/08.DeleteAPI.feature"
 },
 glue={
 		"com.wso2telco.tests.apimanager.base",
@@ -24,7 +25,8 @@ tags = {
 //		"@runnerAllsteps",
 //		"@createSpsteps",
 //		"@addminApproveSteps",
-		"@spSubscribeForAPI"
+		"@InternalGatewayTypeTwoE2EFlow"
+//		"@InternalGatewayDeleteAPI"
 }
 )
 public class RunCukesTest {

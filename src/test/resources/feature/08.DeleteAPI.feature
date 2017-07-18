@@ -30,7 +30,7 @@ Examples:
 |PUBLISHER|NameProdAPI  |v1      |0 Users           |
 
 
-@InternalGateway @ExternalGateway
+
 Scenario Outline: HUB-218 : Hub administrator deletes an API in published state with subscriptions
 Given I am in apimanager
 When I click on apimanager login
@@ -60,7 +60,7 @@ Then I should see the apipublisher error popup with "API Publisher - Error"
 And I click on apipublisher error popup ok button
 Examples:
 | usertype|usertypeSP|apiName      |version |numOfSubscriptions|appName     |
-|PUBLISHER|APPCREATE |NameTestAPI  |v1      |1 User            |AuXTestAPPA |
+|PUBLISHER|APPCREATE |NameTestAPI  |v1      |1 User            |APPNAME |
 
 
 @InternalGateway @ExternalGateway

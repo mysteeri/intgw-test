@@ -2,6 +2,28 @@ Feature: End to end flow of Internal Gateway Type 2
 
 @InternalGatewayTypeTwoE2EFlow
 Scenario Outline: Internal Gateway flow
+Given I am in apimanager
+When I click on apimanager login
+Then I should see the apimanager "Login" pop up
+When I enter apimanager Login username and password for "<usertypeSP>" 
+And I click on apimanager Login pop up login button
+Then I should see apimanager "<usertypeSP>" at the top right corner of the page
+When I click on apimanager My Applications
+Then I should see the apimanager Application page header as "Applications"
+When I delete existing "<appName>"
+Then I should see the confirm delete popup with "Confirm Delete" for "<appName>"
+And I click on confirm delete popup Yes button for "<appName>"
+
+#Delete API if exists
+Given I am in apipublisher
+When I provide apipublisher username and password for "<usertypeAdmin>"
+And I click on apipublisher login button
+Then I should see apipublisher username "<usertypeAdmin>" at the top right corner of the page
+Then I search API with "<apiName>"
+Then I delete API "<apiName>" "<version>"
+Then I should see the apipublisher error popup with "API Publisher - Error" if "<apiName>" exits
+And I click on apipublisher error popup ok button if "<apiName>" exits
+
 #API Publisher Create and Publish an API
 Given I am in apipublisher
 When I provide apipublisher username and password for "<usertypePub>"
@@ -55,6 +77,12 @@ When I enter apimanager Login username and password for "<usertypeSP>"
 And I click on apimanager Login pop up login button
 Then I should see apimanager "<usertypeSP>" at the top right corner of the page
 #Create an Application
+Given I am in apimanager
+When I click on apimanager login
+Then I should see the apimanager "Login" pop up
+When I enter apimanager Login username and password for "<usertypeSP>" 
+And I click on apimanager Login pop up login button
+Then I should see apimanager "<usertypeSP>" at the top right corner of the page
 When I click on apimanager My Applications
 Then I should see the apimanager Application page header as "Applications"
 Then I click on apimanager Add Application
@@ -146,6 +174,6 @@ Then I click on Application "<appName>" "Subscriptions" tab
 Then I should see the API "<apiName>" "<version>" status as "<subscriptionStatus>" and Subscription Tier as "<Subscriptiontiers>"
 
 Examples:
-|usertypePub|usertypeSP|usertypeAdmin|apiPublisherOne|apiName   |version|context  |prodEndpoint |sandEndpoint|roleType		      |ApiTier                                                               |LastName   |FirstName   |Email	           |appName     |Description  |AppStatusBeforeApprove|action |AppStatusAfterApprove|AppTier  |Subscriptiontiers|subscriptionStatus|
-|PUBLISHER  |APPCREATE |AdminUser    |apipublisherOne|AuxAPI    |v1     |auxapi   |auxProd	    |auxSand	 |Internal/publisher  |Unlimited,Default,Requestbased,Silver,Subscription,Gold,Premium,Bronze|AuxTestLast|AuxTestFirst|AuxTest123@gmail.com|AuXTestAPPM |AuXTestingAPP|INACTIVE              |Approve|ACTIVE               |Unlimited|Premium          |UNBLOCKED         |
+|usertypePub|usertypeSP|usertypeAdmin|apiPublisherOne|apiName   	|version|context  		  |prodEndpoint 					  |sandEndpoint						 |roleType		      |ApiTier                                                               |LastName   |FirstName   |Email	           |appName     |Description  |AppStatusBeforeApprove|action |AppStatusAfterApprove|AppTier  |Subscriptiontiers|subscriptionStatus|
+|PUBLISHER  |APPCREATE |AdminUser    |apipublisherOne|paymentWso2T22|v1 	|paymentWso2T22   |http://172.26.76.70:8280/payment	  |http://172.26.76.70:8280/payment	 |Internal/publisher  |Unlimited,Default,Requestbased,Silver,Subscription,Gold,Premium,Bronze|Viraj      |Samarasekara|viraj@wso2telco.com |APPNAME     |AuXTestingAPP|INACTIVE              |Approve|ACTIVE               |Unlimited|Unlimited          |UNBLOCKED         |
 

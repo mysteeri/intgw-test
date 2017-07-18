@@ -153,12 +153,14 @@ public class APIHomeSteps extends BasicTestObject {
 	public void i_click_on_apimanager_login() throws Throwable {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.clickLogInLink();
-		Thread.sleep(sleepTime);
+		final long loginTime =sleepTime/5;
+		Thread.sleep(loginTime);
 	}
 
 	@Then("^I should see the apimanager \"([^\"]*)\" pop up$")
 	public void i_should_see_the_apimanager_pop_up(String arg1) throws Throwable {
-		Thread.sleep(2000);
+		final long loginTime =sleepTime/5;
+		Thread.sleep(loginTime);
 		LoginPage loginPage = new LoginPage(driver);
 		Assert.assertTrue("Login pop up is not displayed", loginPage.isLoginDisplayed(arg1));
 	}
@@ -230,7 +232,8 @@ public class APIHomeSteps extends BasicTestObject {
 	@When("^I click on apimanager My Applications$")
 	public void i_click_on_apimanager_My_Applications() throws Throwable {
 		HomePage homepage = new HomePage(driver);
-		Thread.sleep(sleepTime);
+		final long appSelectionTime =sleepTime/3;
+		Thread.sleep(appSelectionTime);
 		homepage.clickMyApplicationsLink();
 	}
 	
