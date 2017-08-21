@@ -65,6 +65,12 @@ public class BasicTestObject extends TestBase {
 			isInitialized = true;
 		}
 	}
+	protected String getUser(final String varUser) {
+		return config.getValue(varUser+ "_user");
+	}
+	protected String getUserPWD(final String varPWD) {
+		return config.getValue(varPWD+ "_pwd");
+	}
 	
 	public void openBrowser() throws Exception {
 		DesiredCapabilities capabilities = new DesiredCapabilities();

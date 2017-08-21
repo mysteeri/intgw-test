@@ -166,8 +166,8 @@ public class APIHomeSteps extends BasicTestObject {
 	@When("^I enter apimanager Login username and password for \"([^\"]*)\"$")
 	public void i_enter_apimanager_Login_username_and_password_for(String arg1) throws Throwable {
 		LoginPage loginPage = new LoginPage(driver);
-	    loginPage.enterLoginUserName(config.getValue(getEnvironment() + arg1 + "user"));
-		loginPage.enterLoginPassword(config.getValue(getEnvironment() + arg1 + "pwd"));
+	    loginPage.enterLoginUserName(getUser(arg1));
+		loginPage.enterLoginPassword(getUserPWD(arg1));
 	}
 /*	
 	@When("^I enter username and password and Login for \"([^\"]*)\"$")

@@ -24,20 +24,20 @@ public class APIPublisherHome extends BasicTestObject{
 		if (driver==null){
 			initialize();
 			openBrowser();
-			driver.get(config.getValue(getEnvironment() + "ApiManagerPublisher"));
+			driver.get(config.getValue( "ApiManagerPublisher"));
 		}else {
 			driver.close();
 			initialize();
 			openBrowser();
-			driver.get(config.getValue(getEnvironment() + "ApiManagerPublisher"));		
+			driver.get(config.getValue( "ApiManagerPublisher"));		
 		}
 	}
 	
 	@When("^I provide apipublisher username and password for \"([^\"]*)\"$")
 	public void i_provide_apipublisher_username_and_password_for(String arg1) throws Throwable {
 		APIPublisherLoginPage publisherLogin = new APIPublisherLoginPage(driver);
-		publisherLogin.enterUsername(config.getValue(getEnvironment() + arg1 + "user"));
-		publisherLogin.enterPassword(config.getValue(getEnvironment() + arg1 + "pwd"));
+		publisherLogin.enterUsername(getUser(arg1));
+		publisherLogin.enterPassword(getUserPWD(arg1));
 	}
 	
 	@When("^I click on apipublisher login button$")
@@ -49,7 +49,7 @@ public class APIPublisherHome extends BasicTestObject{
 	@Then("^I should see apipublisher username \"([^\"]*)\" at the top right corner of the page$")
 	public void i_should_see_apipublisher_username_at_the_top_right_corner_of_the_page(String arg1) throws Throwable {
 		APIPublisherHomePage publisherHome = new APIPublisherHomePage(driver);
-		Assert.assertTrue("Incorrect user login", publisherHome.isUserLogin(config.getValue(getEnvironment() + arg1 + "user")));
+		Assert.assertTrue("Incorrect user login", publisherHome.isUserLogin(getUser( arg1 )));
 	}
 	
 	@When("^I search existing API \"([^\"]*)\" \"([^\"]*)\" and delete it$")
@@ -313,8 +313,8 @@ public class APIPublisherHome extends BasicTestObject{
 	@When("^I enter the credentials to login \"([^\"]*)\"$")
 	public void i_enter_the_credentials_to_login_and(String arg1) throws Throwable {
 		APIPublisherLoginPage publisherLogin = new APIPublisherLoginPage(driver);
-		publisherLogin.enterUsername(config.getValue(getEnvironment() + arg1 + "user"));
-		publisherLogin.enterPassword(config.getValue(getEnvironment() + arg1 + "pwd"));
+		publisherLogin.enterUsername(getUser(arg1));
+		publisherLogin.enterPassword(getUserPWD(arg1));
 	}
 	
 	@Then("^I should see the apipublisher page \"([^\"]*)\" label$")

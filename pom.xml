@@ -1,27 +1,27 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.wso2telco.apimanager.tests</groupId>
-  <artifactId>api-manager-tests</artifactId>
-  <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>api-manager-tests</name>
-  <url>http://maven.apache.org</url>
-   <properties>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.wso2telco.apimanager.tests</groupId>
+	<artifactId>api-manager-tests</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>api-manager-tests</name>
+	<url>http://maven.apache.org</url>
+	<properties>
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
 	</properties>
-	
+
 	<build>
-<!-- 		<testSourceDirectory>src/test/steps</testSourceDirectory> -->
-<!-- 		<resources> -->
-<!-- 			<resource> -->
-<!-- 				<directory>src/test/resources</directory> -->
-<!-- 				<excludes> -->
-<!-- 					<exclude>**/*.java</exclude> -->
-<!-- 				</excludes> -->
-<!-- 			</resource> -->
-<!-- 		</resources> -->
+		<!-- <testSourceDirectory>src/test/steps</testSourceDirectory> -->
+		<!-- <resources> -->
+		<!-- <resource> -->
+		<!-- <directory>src/test/resources</directory> -->
+		<!-- <excludes> -->
+		<!-- <exclude>**/*.java</exclude> -->
+		<!-- </excludes> -->
+		<!-- </resource> -->
+		<!-- </resources> -->
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -37,29 +37,29 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.17</version>
-					<configuration>
-						<includes>
-							<include>**/RunCukesTest.java</include>
-						</includes>
-						<systemProperties>
-							<property>
-								<name>browser.NAME</name>
-								<value>${browser.NAME}</value>
-							</property>
-							<property>
-								<name>discipline</name>
-								<value>${discipline}</value>
-							</property>
-							<property>
-								<name>env</name>
-								<value>${env}</value>
-							</property>
-							<property>
-								<name>user</name>
-								<value>${user}</value>
-							</property>
-						</systemProperties>
-					</configuration>
+				<configuration>
+					<includes>
+						<include>**/RunCukesTest.java</include>
+					</includes>
+					<systemProperties>
+						<property>
+							<name>browser.NAME</name>
+							<value>${browser.NAME}</value>
+						</property>
+						<property>
+							<name>discipline</name>
+							<value>${discipline}</value>
+						</property>
+						<property>
+							<name>env</name>
+							<value>${env}</value>
+						</property>
+						<property>
+							<name>user</name>
+							<value>${user}</value>
+						</property>
+					</systemProperties>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>net.masterthought</groupId>
@@ -83,105 +83,148 @@
 			</plugin>
 		</plugins>
 	</build>
-	
-  <dependencies>
-    <dependency>
-		<groupId>junit</groupId>
-		<artifactId>junit</artifactId>
-		<version>4.12</version>
-		<scope>test</scope>
-	</dependency>
-	
+
+	<dependencies>
 		<dependency>
-	  <groupId>org.testng</groupId>
-	  <artifactId>testng</artifactId>
-	  <version>6.8</version>
-	  <scope>test</scope>
-	</dependency>
-	
-	<dependency>
-	<groupId>javax.mail</groupId>
-	<artifactId>mail</artifactId>
-	<version>1.4</version>
-</dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
 
-    <dependency>
-        <groupId>com.wso2telco.apimanager.pageobjects</groupId>
-        <artifactId>api-manager-pageobjects</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </dependency>
-    
-     <dependency>
-        <groupId>com.wso2telco.identityserver.pageobjects</groupId>
-        <artifactId>identity-server-pageobjects</artifactId>
-        <version>2.0.0-SNAPSHOT</version>
-    </dependency>
-    
-    
-    	
-   	<dependency>
-		<groupId>info.cukes</groupId>
-		<artifactId>cucumber-jvm-deps</artifactId>
-		<version>1.0.3</version>
-	</dependency>
-	
-	<dependency>
-		<groupId>info.cukes</groupId>
-		<artifactId>cucumber-jvm</artifactId>
-		<version>1.1.5</version>
-		<type>pom</type>
-	</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.8</version>
+		</dependency>
 
-	<dependency>
-		<groupId>info.cukes</groupId>
-		<artifactId>cucumber-java</artifactId>
-		<version>1.2.4</version>
-	</dependency>  
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.wso2telco.test</groupId>
+			<artifactId>dep-apim-pageobjects</artifactId>
+			<version>1.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.wso2telco.test</groupId>
+			<artifactId>carbon-pageobjects</artifactId>
+			<version>1.0.1-SNAPSHOT</version>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-jvm-deps</artifactId>
+			<version>1.0.3</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/info.cukes/cucumber-jvm -->
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-jvm</artifactId>
+			<version>1.2.5</version>
+			<type>pom</type>
+		</dependency>
+
+
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>1.2.4</version>
+		</dependency>
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-junit</artifactId>
 			<version>1.2.3</version>
 		</dependency>
 		<dependency>
-	<groupId>info.cukes</groupId>
-	<artifactId>cucumber-testng</artifactId>
-	<version>1.2.4</version>
-</dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-testng</artifactId>
+			<version>1.2.4</version>
+		</dependency>
 
-<!-- Citrus -->
-    <dependency>
-      <groupId>com.consol.citrus</groupId>
-      <artifactId>citrus-core</artifactId>
-      <version>2.4</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.consol.citrus</groupId>
-      <artifactId>citrus-jms</artifactId>
-      <version>2.4</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.consol.citrus</groupId>
-      <artifactId>citrus-ws</artifactId>
-      <version>2.4</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.consol.citrus</groupId>
-      <artifactId>citrus-http</artifactId>
-      <version>2.4</version>
-      <scope>test</scope>
-    </dependency>
-<!-- Citrus -->
+		<!-- Citrus -->
+		<dependency>
+			<groupId>com.consol.citrus</groupId>
+			<artifactId>citrus-core</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.consol.citrus</groupId>
+			<artifactId>citrus-jms</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.consol.citrus</groupId>
+			<artifactId>citrus-ws</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.consol.citrus</groupId>
+			<artifactId>citrus-http</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<!-- Citrus -->
 
-<!-- Http Client -->
-	<dependency>
-		<groupId>org.jboss.resteasy</groupId>
-		<artifactId>resteasy-jaxrs</artifactId>
-		<version>2.2.1.GA</version>
-	</dependency>
+		<!-- Http Client -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>2.2.1.GA</version>
+		</dependency>
 
-	   
-  </dependencies>
+
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>wso2-nexus</id>
+			<name>WSO2 Repository</name>
+			<url>https://maven.wso2.org/nexus/content/groups/wso2-public</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>ignore</checksumPolicy>
+			</releases>
+		</repository>
+
+		<repository>
+			<id>wso2telco-nexus</id>
+			<name>WSO2Telco internal Repository</name>
+			<url>http://maven.wso2telco.com/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>ignore</checksumPolicy>
+			</releases>
+		</repository>
+		<repository>
+			<id>wso2telco.releases</id>
+			<name>WSO2 internal Repository</name>
+			<url>http://maven.wso2telco.com/nexus/content/repositories/releases/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>ignore</checksumPolicy>
+			</releases>
+		</repository>
+		<repository>
+			<id>wso2Telco.snapshots</id>
+			<name>WSO2Telco Snapshot Repository</name>
+			<url>http://maven.wso2telco.com/nexus/content/repositories/snapshots/</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
+
+	</repositories>
 </project>
