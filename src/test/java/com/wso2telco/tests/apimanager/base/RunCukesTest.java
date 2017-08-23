@@ -26,7 +26,9 @@ tags = {
 //		"@createSpsteps",
 //		"@addminApproveSteps",
 		"@InternalGatewayTypeTwoE2EFlow"
-//		"@deleteAPI"
+//		"@deleteAPICreateds"
+//		"@deleteAPIPUBLISED"
+//		"@deleteApplication"
 }
 )
 public class RunCukesTest {

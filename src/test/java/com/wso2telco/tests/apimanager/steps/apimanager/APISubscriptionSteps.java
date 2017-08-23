@@ -172,33 +172,33 @@ public class APISubscriptionSteps extends BasicTestObject {
 	public void i_should_see_the_and_under_Subscribed_APIs(String arg1, String arg2) throws Throwable {
 		SubscriptionsPage subpage = new SubscriptionsPage(driver);
 		Thread.sleep(sleepTime);
-		Assert.assertTrue("Subscribed APIs not showed", subpage.isSubscribedAPIs(config.getValue(arg1),arg2));
+		Assert.assertTrue("Subscribed APIs not showed", subpage.isSubscribedAPIs(arg1.trim(),arg2));
 	}
 	
 	@Then("^I should see the apimanager Application \"([^\"]*)\" Subscriptions page header as \"([^\"]*)\"$")
 	public void i_should_see_the_apimanager_Application_Subscriptions_page_header_as(String arg1, String arg2) throws Throwable {
 		SubscriptionsPage subpage = new SubscriptionsPage(driver);
-		Assert.assertTrue("Subscription page did not load properly", subpage.isSubscriptionHeaderDisplayed(config.getValue(arg1),arg2));
+		Assert.assertTrue("Subscription page did not load properly", subpage.isSubscriptionHeaderDisplayed(arg1.trim(),arg2));
 	}
 
 	@Then("^I should see \"([^\"]*)\" of the same \"([^\"]*)\" is listed under Subscribed APIs$")
 	public void i_should_see_of_the_same_is_listed_under_Subscribed_APIs(String arg1, String arg2) throws Throwable {
 		SubscriptionsPage subpage = new SubscriptionsPage(driver);
 		Thread.sleep(sleepTime);
-		Assert.assertTrue("Subscribed APIs not showed", subpage.isSubscribedAPIs(config.getValue(arg1),arg2));
+		Assert.assertTrue("Subscribed APIs not showed", subpage.isSubscribedAPIs(arg1.trim(),arg2));
 	}
 
 	@When("^I click on Application \"([^\"]*)\" \"([^\"]*)\" tab$")
 	public void i_click_on_Application_tab(String arg1, String arg2) throws Throwable {
 		SubscriptionsPage subpage = new SubscriptionsPage(driver);
-		subpage.clickSubscriptionTab(config.getValue(arg1), arg2);
+		subpage.clickSubscriptionTab(arg1.trim(), arg2);
 		Thread.sleep(sleepTime);
 	}
 
 	@When("^I unsubscribe existing \"([^\"]*)\" with \"([^\"]*)\"$")
 	public void i_unsubscribe_existing_with(String arg1, String arg2) throws Throwable {
 		SubscriptionsPage subpage = new SubscriptionsPage(driver);
-		subpage.clickUnsubscribe(config.getValue(arg1), arg2);
+		subpage.clickUnsubscribe(arg1.trim(), arg2);
 		Thread.sleep(sleepTime);
 	}
 
@@ -213,8 +213,8 @@ public class APISubscriptionSteps extends BasicTestObject {
 	@Then("^I should see the API \"([^\"]*)\" \"([^\"]*)\" status as \"([^\"]*)\" and Subscription Tier as \"([^\"]*)\"$")
 	public void i_should_see_the_API_status_as_and_Subscription_Tier_as(String arg1, String arg2, String arg3, String arg4) throws Throwable {
 		SubscriptionsPage subpage = new SubscriptionsPage(driver);
-		subpage.validateSubscriptionStatus(config.getValue(arg1+arg2), arg3);
-		subpage.validateSubscriptionTier(config.getValue(arg1+arg2), arg4);
+		subpage.validateSubscriptionStatus(arg1+arg2, arg3);
+		subpage.validateSubscriptionTier(arg1+arg2, arg4);
 	}
 
 	@Then("^I unsubscribe existing \"([^\"]*)\" with \"([^\"]*)\" if subscription exist$")

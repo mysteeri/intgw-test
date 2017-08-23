@@ -2,7 +2,7 @@ Feature: End to end flow of Internal Gateway Type 2
 
 @InternalGatewayTypeTwoE2EFlow 
 Scenario Outline: Internal Gateway flow 
-#API Publisher Create and Publish an API
+API Publisher Create and Publish an API
 Given I am in apipublisher 
 	When I provide apipublisher username and password for "<usertypePub>" 
 	And I click on apipublisher login button 
@@ -26,7 +26,7 @@ Given I am in apipublisher
 	Then I should see the status as "PUBLISHED" 
 	#Service Provider Sign up to API store
 	Given I am in identity server page 
-	When I enter apimanager Login username and password for "<usertypeAdmin>" 
+	When I enter identity server username credentials
 	And I click on identity server sign in
 	Then I should see the ids Home page header as "WSO2Telco Hub Home" 
 	When I click on identity server Main tab 
@@ -82,7 +82,7 @@ Given I am in apipublisher
 	When I enter aprrove/reject reason as "Approve" 
 	And click aprrove/reject reason ok button 
 	Then I should not see the created application in Approval Tasks table as "<appName>" for "<usertypeAdmin>" 
-	#Login to store and check the status of the application
+	##Login to store and check the status of the application
 	Given I am in apimanager 
 	When I click on apimanager login 
 	Then I should see the apimanager "Login" pop up 
@@ -105,7 +105,7 @@ Given I am in apipublisher
 	When I click Go to My Subscription button 
 	Then I should see the apimanager Application "<appName>" Subscriptions page header as "Subscriptions" 
 	Then I should see the "<apiName>" and "<version>" under Subscribed APIs 
-	#API Publisher Approves the created subscription
+	##API Publisher Approves the created subscription
 	Given I am in hubmanager 
 	Then I should see the apimanager Manager page header as "Manager" 
 	When I enter apimanager Manager page "<apiPublisherOne>" username credentials 
@@ -143,21 +143,52 @@ Given I am in apipublisher
 	Then I should see the API "<apiName>" "<version>" status as "<subscriptionStatus>" and Subscription Tier as "<Subscriptiontiers>" 
 	
 	Examples: 
-		|usertypePub|usertypeSP|usertypeAdmin|apiPublisherOne|apiName    |version|context        |prodEndpoint |sandEndpoint|roleType |ApiTier                              |LastName   |FirstName   |Email	          												 |appName     |Description           |AppStatusBeforeApprove|action 	  |AppStatusAfterApprove|AppTier  |Subscriptiontiers|subscriptionStatus|
-		|PUBLISHER  |SP        |ADMIN        |PUBLISHER      |telPayment |v1     |tELPayment   |http://172.26.76.70:8280/payment	   |http://172.26.76.70:8280/payment	 |Internal/publisher  |Unlimited,Default,Requestbased,Silver,Subscription,Gold,Premium,Bronze|TelcoTestAPP|Telco test application|viraj@ws02telco.com   |TelcoPayment |AuXTestingAPP|INACTIVE              |Approve|ACTIVE               |Unlimited|Premium          |UNBLOCKED         |
+		|usertypePub|usertypeSP|usertypeAdmin|apiPublisherOne|apiName    |version|context      |prodEndpoint 						   |sandEndpoint						 |roleType 			  |ApiTier                              								 |LastName    |FirstName   |Email	          												 |appName     |Description           |AppStatusBeforeApprove|action 	  |AppStatusAfterApprove|AppTier  |Subscriptiontiers|subscriptionStatus|
+		|PUBLISHER  |SP        |ADMIN        |PUBLISHER      |telPayment |v1     |TELPayment   |http://172.26.76.70:8280/payment	   |http://172.26.76.70:8280/payment	 |Internal/publisher  |Unlimited,Default,Requestbased,Silver,Subscription,Gold,Premium,Bronze|TelcoTestAPP             |Telcotestapplication|viraj@ws02telco.com                         |TelcoPayment |AuXTestingAPP|INACTIVE              |Approve|ACTIVE               |Unlimited|Premium          |UNBLOCKED         |
 		
 		
 		
-@deleteAPI 
-	Scenario Outline: Hub administrator deletes an API in published state without subscriptions 
-			Given I am in apipublisher 
-			When I provide apipublisher username and password for "<usertype>" 
-			And I click on apipublisher login button 
-			Then I should see apipublisher username "<usertype>" at the top right corner of the page 
-			Then I search API with "<apiName>" 
-			Then I should see API "<apiName>" "<version>" with "CREATED" state 
-			Then I should see API "<apiName>" "<version>" with "<numOfSubscriptions>" Subscriptions 
-			Then I delete API "<apiName>" "<version>" 
-			Examples: 
-				| usertype|usertypePub|apiName      |version |numOfSubscriptions|
-				|ADMIN    |SP         |telPayment  |v1      |0 Users           |
+@deleteAPICreateds 
+Scenario Outline: Hub administrator deletes an API in published state without subscriptions 
+Given I am in apipublisher 
+When I provide apipublisher username and password for "<usertype>" 
+And I click on apipublisher login button 
+Then I should see apipublisher username "<usertype>" at the top right corner of the page 
+Then I search API with "<apiName>" 
+Then I should see API "<apiName>" "<version>" with "CREATED" state 
+Then I should see API "<apiName>" "<version>" with "<numOfSubscriptions>" Subscriptions 
+Then I delete API "<apiName>" "<version>" 
+Examples: 
+		| usertype|usertypePub|apiName      |version |numOfSubscriptions|
+		|ADMIN    |SP         |telPayment  |v1      |0 Users           |
+		
+@deleteAPIPUBLISED 
+Scenario Outline: Hub administrator deletes an API in published state without subscriptions 
+Given I am in apipublisher 
+When I provide apipublisher username and password for "<usertype>" 
+And I click on apipublisher login button 
+Then I should see apipublisher username "<usertype>" at the top right corner of the page 
+Then I search API with "<apiName>" 
+#Then I should see API "<apiName>" "<version>" with "PUBLISHED" state 
+#Then I should see API "<apiName>" "<version>" with "<numOfSubscriptions>" Subscriptions 
+Then I delete API "<apiName>" "<version>" 
+Examples: 
+		| usertype|usertypePub|apiName      |version |numOfSubscriptions|
+		|ADMIN     |SP         |telPayment  |v1      |0 Users           |
+		
+@deleteApplication		
+Scenario Outline: HUB-64 : User deletes created application
+Given I am in apimanager
+When I click on apimanager login
+Then I should see the apimanager "Login" pop up
+When I enter apimanager Login username and password for "<usertypeAdmin>" 
+And I click on apimanager Login pop up login button
+Then I should see apimanager "<usertypeAdmin>" at the top right corner of the page
+When I click on apimanager My Applications
+Then I should see the apimanager Application page header as "Applications"
+When I delete existing "<appName>"
+Then I should see the confirm delete popup with "Confirm Delete"
+And I click on confirm delete popup Yes button
+Examples:
+|usertypeAdmin |appName      |Description  |status  |
+|SP       |TelcoPayment	|AuXTestingAPP|INACTIVE|

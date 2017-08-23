@@ -6,6 +6,7 @@ import com.wso2telco.apimanager.pageobjects.apihome.HomePage;
 import com.wso2telco.apimanager.pageobjects.apihome.subscriptions.SubscriptionsPage;
 import com.wso2telco.apimanager.pageobjects.login.LoginPage;
 import com.wso2telco.apimanager.pageobjects.signup.SignUpPage;
+import com.wso2telco.test.framework.util.ConfigReader;
 import com.wso2telco.tests.apimanager.base.BasicTestObject;
 
 import cucumber.api.java.en.Given;
@@ -22,12 +23,12 @@ public class APIHomeSteps extends BasicTestObject {
 		if (driver == null) {
 			initialize();
 			openBrowser();
-			driver.get(config.getValue(getEnvironment() + "ApiManagerSiteName"));
+			driver.get(config.getValue( "ApiManagerSiteName"));
 		} else {
 			driver.close();
 			initialize();
 			openBrowser();
-			driver.get(config.getValue(getEnvironment() + "ApiManagerSiteName"));
+			driver.get(config.getValue( "ApiManagerSiteName"));
 		}
 	}
 
@@ -48,7 +49,7 @@ public class APIHomeSteps extends BasicTestObject {
 	@When("^I enter apimanager Sign-up for a new account username for \"([^\"]*)\"$")
 	public void i_enter_apimanager_Sign_up_for_a_new_account_username_for(String arg1) throws Throwable {
 	    SignUpPage signupPage = new SignUpPage(driver);
-		signupPage.enterNewUName(config.getValue(getEnvironment() + arg1 + "user"));
+		signupPage.enterNewUName(ConfigReader.getUser(arg1));
 	}
 /*	
 	@When("^I enter apimanager Sign-up for a new account username with randomNumber for \"([^\"]*)\"$")
@@ -60,31 +61,31 @@ public class APIHomeSteps extends BasicTestObject {
 	@When("^I enter apimanager Sign-up for a new account Password for \"([^\"]*)\"$")
 	public void i_enter_apimanager_Sign_up_for_a_new_account_Password_for(String arg1) throws Throwable {
 		SignUpPage signupPage = new SignUpPage(driver);
-		signupPage.enterPWord(config.getValue(getEnvironment() + arg1 + "pwd"));
+		signupPage.enterPWord(ConfigReader.getPwd(arg1.trim()));
 	}
 
 	@When("^I enter apimanager Sign-up for a new account Re-type password for \"([^\"]*)\"$")
 	public void i_enter_apimanager_Sign_up_for_a_new_account_Re_type_password_for(String arg1) throws Throwable {
 		SignUpPage signupPage = new SignUpPage(driver);
-		signupPage.reTypePWord(config.getValue(getEnvironment() + arg1 + "pwd"));
+		signupPage.reTypePWord(ConfigReader.getPwd(arg1.trim()));
 	}
 
 	@When("^I enter apimanager Sign-up for a new account Last name as \"([^\"]*)\"$")
 	public void i_enter_apimanager_Sign_up_for_a_new_account_Last_name_as(String arg1) throws Throwable {
 		SignUpPage signupPage = new SignUpPage(driver);
-		signupPage.enterLName(arg1);
+		signupPage.enterLName(arg1.trim());
 	}
 
 	@When("^I enter apimanager Sign-up for a new account First name as \"([^\"]*)\"$")
 	public void i_enter_apimanager_Sign_up_for_a_new_account_First_name_as(String arg1) throws Throwable {
 		SignUpPage signupPage = new SignUpPage(driver);
-		signupPage.enterFName(arg1);
+		signupPage.enterFName(arg1.trim());
 	}
 
 	@When("^I enter apimanager Sign-up for a new account Email as \"([^\"]*)\"$")
 	public void i_enter_apimanager_Sign_up_for_a_new_account_Email_as(String arg1) throws Throwable {
 		SignUpPage signupPage = new SignUpPage(driver);
-		signupPage.enterEmail(arg1);
+		signupPage.enterEmail(arg1.trim());
 	}
 
 	@When("^I click on link that given to expand optional fields\\.$")
@@ -153,7 +154,7 @@ public class APIHomeSteps extends BasicTestObject {
 	public void i_click_on_apimanager_login() throws Throwable {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.clickLogInLink();
-		Thread.sleep(sleepTime);
+		Thread.sleep(sleepTime/4);
 	}
 
 	@Then("^I should see the apimanager \"([^\"]*)\" pop up$")
@@ -166,8 +167,8 @@ public class APIHomeSteps extends BasicTestObject {
 	@When("^I enter apimanager Login username and password for \"([^\"]*)\"$")
 	public void i_enter_apimanager_Login_username_and_password_for(String arg1) throws Throwable {
 		LoginPage loginPage = new LoginPage(driver);
-	    loginPage.enterLoginUserName(getUser(arg1));
-		loginPage.enterLoginPassword(getUserPWD(arg1));
+	    loginPage.enterLoginUserName(ConfigReader.getUser(arg1.trim()));
+		loginPage.enterLoginPassword(ConfigReader.getPwd(arg1.trim()));
 	}
 /*	
 	@When("^I enter username and password and Login for \"([^\"]*)\"$")
@@ -186,9 +187,9 @@ public class APIHomeSteps extends BasicTestObject {
 	@Then("^I should see apimanager \"([^\"]*)\" at the top right corner of the page$")
 	public void i_should_see_apimanager_at_the_top_right_corner_of_the_page(String arg1) throws Throwable {
 		LoginPage loginPage = new LoginPage(driver);
-		Thread.sleep(sleepTime);
+		Thread.sleep(sleepTime/4);
 		Assert.assertTrue("User Name did not show properly",
-				loginPage.isUserName(config.getValue(getEnvironment() + arg1 + "user")));
+				loginPage.isUserName(ConfigReader.getUser(arg1)));
 	}
 /*	
 	@Then("^I should see the logged apimanager \"([^\"]*)\" at the top right corner of the page$")
@@ -236,7 +237,7 @@ public class APIHomeSteps extends BasicTestObject {
 	
 	@Then("^I click on apimanager Add Application$")
 	public void i_click_on_apimanager_Add_Application() throws Throwable {
-		Thread.sleep(1000);
+		Thread.sleep(sleepTime/5);
 		HomePage homepage = new HomePage(driver);
 		homepage.clickAddApplicationLink();
 	}
@@ -270,8 +271,8 @@ public class APIHomeSteps extends BasicTestObject {
 	@When("^I enter apimanager Login username and password for admin \"([^\"]*)\"$")
 	public void i_enter_apimanager_Login_username_and_password_for_admin(String arg1) throws Throwable {
 		LoginPage loginPage = new LoginPage(driver);
-		loginPage.enterLoginUserName(config.getValue(getEnvironment() + arg1 + "UserName"));
-		loginPage.enterLoginPassword(config.getValue(getEnvironment() + arg1 + "Password"));
+		loginPage.enterLoginUserName(ConfigReader.getAdminUser());
+		loginPage.enterLoginPassword(ConfigReader.getAdminPwd());
 	}
 
 	@Then("^I should see apimanager admin \"([^\"]*)\" at the top right corner of the page$")
@@ -279,7 +280,7 @@ public class APIHomeSteps extends BasicTestObject {
 		LoginPage loginPage = new LoginPage(driver);
 		Thread.sleep(sleepTime);
 		Assert.assertTrue("User Name did not show properly",
-				loginPage.isUserName(config.getValue(getEnvironment() + arg1 + "UserName")));
+				loginPage.isUserName(ConfigReader.getAdminUser()));
 	}
 
 	@When("^I select created application \"([^\"]*)\" from the dropdown for admin \"([^\"]*)\"$")

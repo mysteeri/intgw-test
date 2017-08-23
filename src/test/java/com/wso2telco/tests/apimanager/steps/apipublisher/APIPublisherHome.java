@@ -428,12 +428,12 @@ public class APIPublisherHome extends BasicTestObject{
 	@Then("^I search API with \"([^\"]*)\"$")
 	public void i_search_API_with(String arg1) throws Throwable {
 		APIPublisherHomePage publisherHome = new APIPublisherHomePage(driver);
-		Thread.sleep(sleepTime);
+		Thread.sleep(sleepTime/10);
 		publisherHome.enterAPINameSearch(arg1);
 		//publisherHome.enterAPINameSearch(config.getValue(arg1));
-		Thread.sleep(sleepTime);
+		Thread.sleep(sleepTime/10);
 		publisherHome.clickSearch();
-		Thread.sleep(sleepTime);
+		Thread.sleep(sleepTime/10);
 	}
 
 
@@ -441,7 +441,7 @@ public class APIPublisherHome extends BasicTestObject{
 	public void i_delete_API(String arg1, String arg2) throws Throwable {
 		APIPublisherHomePage publisherHome = new APIPublisherHomePage(driver);
 		publisherHome.deleteExistingAPI(config.getValue(arg1), arg2);
-		Thread.sleep(sleepTime);
+		Thread.sleep(sleepTime/10);
 	}
 	
 	@Then("^I should see API \"([^\"]*)\" \"([^\"]*)\" with \"([^\"]*)\" state$")

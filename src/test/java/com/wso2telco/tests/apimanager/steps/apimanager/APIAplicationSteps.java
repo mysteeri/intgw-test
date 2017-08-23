@@ -42,7 +42,7 @@ public class APIAplicationSteps extends BasicTestObject {
 		if (apppage.isAppAvailable(config.getValue(arg1))) {
 			apppage.clickDelete(config.getValue(arg1));
 		}
-		Thread.sleep(sleepTime);
+		Thread.sleep(sleepTime/4);
 	}
 
 /*	
@@ -60,25 +60,17 @@ public class APIAplicationSteps extends BasicTestObject {
 	@Then("^I enter \"([^\"]*)\" as name and \"([^\"]*)\" as Description$")
 	public void i_enter_as_name_and_as_Description(String arg1, String arg2) throws Throwable {
 		ApplicationsPage apppage = new ApplicationsPage(driver);
-//		if(arg1.isEmpty()){
-//			apppage.enterAppllicationName(arg1);
-//		}
-//		else{
-//			String appName = arg1;// + randomNumber;
-//
-//			config.setValue(arg1, appName);
-//		}
-		apppage.enterAppllicationName(config.getValue(arg1));
-		Thread.sleep(sleepTime);
-		apppage.enterAppllicationDescription(arg2);
-		Thread.sleep(sleepTime);
+		apppage.enterAppllicationName( arg1.trim());
+		Thread.sleep(sleepTime/6);
+		apppage.enterAppllicationDescription(arg2.trim());
+		Thread.sleep(sleepTime/6);
 	}
 	
 	@When("^I click on Add button$")
 	public void i_click_on_Add_button() throws Throwable {
 		ApplicationsPage apppage = new ApplicationsPage(driver);
 		apppage.clickApplicationAdd();
-		Thread.sleep(sleepTime);
+		Thread.sleep(sleepTime/4);
 	}
 	
 /*	@Then("^I should see the added Application name as \"([^\"]*)\" _ \"([^\"]*)\" Tier as \"([^\"]*)\" Status as \"([^\"]*)\" and Description as \"([^\"]*)\"$")
@@ -172,8 +164,8 @@ public class APIAplicationSteps extends BasicTestObject {
 	@When("^I click on apimanager Application \"([^\"]*)\"$")
 	public void i_click_on_apimanager_Application(String arg1) throws Throwable {
 		ApplicationsPage apppage = new ApplicationsPage(driver);
-		apppage.isAppAvailable(config.getValue(arg1));
-		apppage.clickAppName(config.getValue(arg1));
+		apppage.isAppAvailable(arg1.trim());
+		apppage.clickAppName(arg1.trim());
 	}
 	
 	@Then("^I should see \"([^\"]*)\" Subscription for \"([^\"]*)\"$")
@@ -191,7 +183,7 @@ public class APIAplicationSteps extends BasicTestObject {
 	@Then("^I should see the Application \"([^\"]*)\" workflow status as \"([^\"]*)\" and Tier as \"([^\"]*)\"$")
 	public void i_should_see_the_Application_workflow_status_as_and_Tier_as(String arg1, String arg2, String arg3) throws Throwable {
 		ApplicationsPage apppage = new ApplicationsPage(driver);
-		apppage.validateWorkflowStatus(config.getValue(arg1), arg2);
-		apppage.validateApplicationTier(config.getValue(arg1), arg3);
+		apppage.validateWorkflowStatus(arg1.trim(), arg2);
+		apppage.validateApplicationTier(arg1.trim(), arg3);
 	}
 }

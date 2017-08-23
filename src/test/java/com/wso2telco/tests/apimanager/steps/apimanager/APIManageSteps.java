@@ -10,6 +10,7 @@ import org.junit.Assert;
 import com.wso2telco.apimanager.pageobjects.apihome.manager.ManagerPage;
 import com.wso2telco.apimanager.pageobjects.db.queries.SQLQuery;
 import com.wso2telco.test.framework.tools.excelfile.ExcelFileReader;
+import com.wso2telco.test.framework.util.ConfigReader;
 import com.wso2telco.tests.apimanager.base.BasicTestObject;
 import com.wso2telco.tests.util.data.RuntimeData;
 import com.wso2telco.tests.util.data.WhiteListData;
@@ -48,27 +49,25 @@ public class APIManageSteps extends BasicTestObject {
 	@When("^I enter apimanager Manager page username and password for \"([^\"]*)\"$")
 	public void i_enter_apimanager_Manager_page_username_and_password_for(String arg1) throws Throwable {
 		ManagerPage managerpage = new ManagerPage(driver);
-		Thread.sleep(sleepTime);
-		managerpage.enterUserName(config.getValue(getEnvironment() + arg1 + "user"));
+		Thread.sleep(sleepTime/4);
+		managerpage.enterUserName(ConfigReader.getUser(   arg1 ));
 //		Thread.sleep(sleepTime);
-		managerpage.enterPassword(config.getValue(getEnvironment() + arg1 + "pwd"));
+		managerpage.enterPassword(ConfigReader.getPwd(arg1));
 	}
 
 	@When("^I enter apimanager Manager page admin username credentials$")
 	public void i_enter_apimanager_Manager_page_admin_username_credentials() throws Throwable {
 		ManagerPage managerpage = new ManagerPage(driver);
-		managerpage.enterUserName(config.getValue(getEnvironment() + "OperatorUserName"));
-		managerpage.enterPassword(config.getValue(getEnvironment() + "OperatorPassword"));
+		managerpage.enterUserName(ConfigReader.getAdminUser());
+		managerpage.enterPassword(ConfigReader.getAdminPwd());
 	}
 
 	@When("^I enter apimanager Manager page operator username credentials$")
 	public void i_enter_apimanager_Manager_page_operator_username_credentials()
 			throws Throwable {
 		ManagerPage managerpage = new ManagerPage(driver);
-		managerpage.enterUserName(config.getValue(getEnvironment()
-				+ "OperatorUserName"));
-		managerpage.enterPassword(config.getValue(getEnvironment()
-				+ "OperatorPassword"));
+		managerpage.enterUserName(ConfigReader.getAdminUser());
+		managerpage.enterPassword(ConfigReader.getAdminPwd());
 	}
 
 	@When("^I click on apimanager Manager page login button$")
@@ -77,7 +76,7 @@ public class APIManageSteps extends BasicTestObject {
 		ManagerPage managerpage = new ManagerPage(driver);
 		managerpage.clickLogin();
 //		Thread.sleep(28000);
-		Thread.sleep(sleepTime);
+		Thread.sleep(sleepTime/4);
 	}
 
 	@Then("^I should see the apimanager Manager Home page header as \"([^\"]*)\"$")
@@ -195,8 +194,8 @@ public class APIManageSteps extends BasicTestObject {
 	@Then("^I should see created application \"([^\"]*)\" at the top of the Approval Tasks table for \"([^\"]*)\"$")
 	public void i_should_see_created_application_at_the_top_of_the_Approval_Tasks_table_for(String arg1, String arg2) throws Throwable {
 		ManagerPage managerpage = new ManagerPage(driver);
-		String appName = config.getValue(arg1);
-		Thread.sleep(sleepTime);
+		String appName =  arg1;
+		Thread.sleep(sleepTime/4);
 		Assert.assertTrue("App name is not visible in the area", managerpage.isApplicationNameVisible(appName));
 	}
 
@@ -233,10 +232,10 @@ public class APIManageSteps extends BasicTestObject {
 	@When("^I select \"([^\"]*)\" and click complete button for \"([^\"]*)\" Application Details row for \"([^\"]*)\"$")
 	public void i_select_and_click_complete_button_for_Application_Details_row_for(String arg1, String arg2, String arg3) throws Throwable {
 		ManagerPage managerpage = new ManagerPage(driver);
-		String appName = config.getValue(arg2);
+		String appName =  arg2.trim();
 		managerpage.selectCondition(arg1, appName);
 		managerpage.clickComplete(appName);
-		Thread.sleep(sleepTime);
+		Thread.sleep(sleepTime/8);
 	}
 
 	@When("^I enter aprrove/reject reason as \"([^\"]*)\"$")
@@ -268,7 +267,7 @@ public class APIManageSteps extends BasicTestObject {
 	@Then("^I should not see the created application in Approval Tasks table as \"([^\"]*)\" for \"([^\"]*)\"$")
 	public void i_should_not_see_the_created_application_in_Approval_Tasks_table_as_for(String arg1, String arg2) throws Throwable {
 		ManagerPage managerpage = new ManagerPage(driver);
-		String appName = config.getValue(arg1);
+		String appName = arg1.trim();
 		Assert.assertTrue("App name is visible after approving", managerpage.isApplicationNameNotVisible(appName));
 		Thread.sleep(sleepTime);
 	}
@@ -752,19 +751,9 @@ public class APIManageSteps extends BasicTestObject {
 	@When("^I enter apimanager Manager page \"([^\"]*)\" username credentials$")
 	public void i_enter_apimanager_Manager_page_username_credentials(String arg1) throws Throwable {
 		ManagerPage managerpage = new ManagerPage(driver);
-		
-	    if(arg1.contains("apipublisherOne")){
-	    	managerpage.enterUserName(config.getValue(getEnvironment() + "PUBLISHERuser"));
-			managerpage.enterPassword(config.getValue(getEnvironment() + "PUBLISHERpwd"));
-	    }
-	    else if(arg1.contains("apipublisherTwo")){
-	    	managerpage.enterUserName(config.getValue(getEnvironment() + "PUBLISHERTWOuser"));
-			managerpage.enterPassword(config.getValue(getEnvironment() + "PUBLISHERTWOpwd"));
-	    }
-	    else{
-	    	managerpage.enterUserName(config.getValue(getEnvironment() + "PUBLISHERTHREEuser"));
-			managerpage.enterPassword(config.getValue(getEnvironment() + "PUBLISHERTHREEpwd"));
-	    }
+    	managerpage.enterUserName(ConfigReader.getUser(arg1));
+		managerpage.enterPassword(ConfigReader.getPwd(arg1));
+    
 	}
 	
 //	@Then("^I should see created subscription with \"([^\"]*)\" and \"([^\"]*)\" at the top of the Approval Tasks table for \"([^\"]*)\"$")
@@ -772,19 +761,19 @@ public class APIManageSteps extends BasicTestObject {
 	@Then("^I should see created subscription with \"([^\"]*)\" and \"([^\"]*)\" \"([^\"]*)\" at the top of the Approval Tasks table for \"([^\"]*)\"$")
 	public void i_should_see_created_subscription_with_and_at_the_top_of_the_Approval_Tasks_table_for(String arg1, String arg2, String arg3, String arg4) throws Throwable {	
 		ManagerPage managerpage = new ManagerPage(driver);
-		String appName = config.getValue(arg1);
-		String apiName = config.getValue(arg2+arg3);
-		Thread.sleep(sleepTime);
+		String appName =  arg1 ;
+		String apiName =  arg2+" - "+arg3 ;
+		Thread.sleep(sleepTime/5);
 		Assert.assertTrue("Subscription name is not visible in the area", managerpage.isSubscriptionVisible(appName,apiName));
 	}
 	
 	@Then("^I should not see created subscription with \"([^\"]*)\" and \"([^\"]*)\" \"([^\"]*)\" in the Approval Tasks table$")
 	public void i_should_not_see_created_subscription_with_and_in_the_Approval_Tasks_table(String arg1, String arg2, String arg3) throws Throwable {
 		ManagerPage managerpage = new ManagerPage(driver);
-		String appName = config.getValue(arg1);
-		String apiName = config.getValue(arg2+arg3);
+		String appName =  arg1 ;
+		String apiName =  arg2+" - "+arg3 ;
 		Assert.assertTrue("Subscription name is visible in the area", managerpage.isSubscriptionNotVisible(appName,apiName));
-		Thread.sleep(sleepTime);
+		Thread.sleep(sleepTime/8);
 	}
 	
 //	@Then("^I should see the status of the subscription \"([^\"]*)\" \"([^\"]*)\" approval task as \"([^\"]*)\"$")
@@ -792,7 +781,7 @@ public class APIManageSteps extends BasicTestObject {
 	@Then("^I should see the status of the subscription \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" approval task as \"([^\"]*)\"$")
 	public void i_should_see_the_status_of_the_subscription_approval_task_as(String arg1, String arg2, String arg3, String arg4) throws Throwable {
 		ManagerPage managerpage = new ManagerPage(driver);
-		Assert.assertTrue("Approval Status mismatched", managerpage.isSubscriptionApprovalTaskStatus(config.getValue(arg1), config.getValue(arg2+arg3), arg4));
+		Assert.assertTrue("Approval Status mismatched", managerpage.isSubscriptionApprovalTaskStatus(arg1, arg2+" - "+arg3 , arg4));
 	}
 	
 //	@Then("^I click Assign To Me button for \"([^\"]*)\" \"([^\"]*)\" Subscription Details row for \"([^\"]*)\"$")
@@ -800,17 +789,17 @@ public class APIManageSteps extends BasicTestObject {
 	@Then("^I click Assign To Me button for \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" Subscription Details row for \"([^\"]*)\"$")
 	public void i_click_Assign_To_Me_button_for_Subscription_Details_row_for(String arg1, String arg2, String arg3, String arg4) throws Throwable {
 		ManagerPage managerpage = new ManagerPage(driver);
-		String appName = config.getValue(arg1);
-		String apiName = config.getValue(arg2+arg3);
+		String appName = arg1;
+		String apiName = arg2+" - "+arg3;
 		managerpage.clickSubscriptionAssignMe(appName,apiName);
-		Thread.sleep(sleepTime);
+		Thread.sleep(sleepTime/8);
 	}
 	
 	@Then("^I click on Start button for \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" Subscription Details row for \"([^\"]*)\"$")
 	public void i_click_on_Start_button_for_Subscription_Details_row_for(String arg1, String arg2, String arg3, String arg4) throws Throwable {
 		ManagerPage managerpage = new ManagerPage(driver);
-		String appName = config.getValue(arg1);
-		String apiName = config.getValue(arg2+arg3);
+		String appName = arg1;
+		String apiName = arg2+" - "+arg3;
 		managerpage.clickSubscriptionStart(appName, apiName);
 		Thread.sleep(sleepTime);
 	}
@@ -819,8 +808,8 @@ public class APIManageSteps extends BasicTestObject {
 	public void i_select_and_click_complete_button_for_Subscription_Details_row_for(String arg1, String arg2, String arg3, String arg4, String arg5) throws Throwable {
 		ManagerPage managerpage = new ManagerPage(driver);
 		String condition = arg1;
-		String appName = config.getValue(arg2);
-		String apiName = config.getValue(arg3+arg4);
+		String appName =  arg2 ;
+		String apiName =  arg3+" - "+arg4 ;
 		managerpage.selectSubscriptionActionCondition(condition, appName, apiName);
 		managerpage.clickSubscriptionComplete(appName, apiName);
 		Thread.sleep(sleepTime);
@@ -841,23 +830,23 @@ public class APIManageSteps extends BasicTestObject {
 	@When("^I click on Subscription Details drop box for \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" row for \"([^\"]*)\"$")
 	public void i_click_on_Subscription_Details_drop_box_for_row_for(String arg1, String arg2, String arg3, String arg4) throws Throwable {
 	    ManagerPage managerpage = new ManagerPage(driver);
-		String appName = config.getValue(arg1);
-		String apiName = config.getValue(arg2+arg3);
+		String appName =  arg1 ;
+		String apiName =  arg2+" - "+arg3 ;
 		managerpage.clickSubscriptionDetails(appName, apiName);
 	}
 	
 	@When("^I select \"([^\"]*)\" for \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" Subscription Details row for \"([^\"]*)\"$")
 	public void i_select_for_Subscription_Details_row_for(String arg1, String arg2, String arg3, String arg4, String arg5) throws Throwable {
 		ManagerPage managerpage = new ManagerPage(driver);
-		String appName = config.getValue(arg2);
-		String apiName = config.getValue(arg3+arg4);
+		String appName = arg2;
+		String apiName =  arg3.trim()+" - "+arg4.trim() ;
 		managerpage.selectSubscriptionTier(arg1, appName, apiName);
 	}
 	
 	@When("^I should see the selected throttling layer as \"([^\"]*)\" for \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" Subscription$")
 	public void i_should_see_the_selected_throttling_layer_as_for_Subscription(String arg1, String arg2, String arg3, String arg4) throws Throwable {
 		ManagerPage managerpage = new ManagerPage(driver);
-		managerpage.isSubscriptionTierValueDisplayed(arg1, config.getValue(arg2), config.getValue(arg3+arg4));
+		managerpage.isSubscriptionTierValueDisplayed(arg1,  arg2.trim(), arg3+" - "+arg4);
 	}
 
 }
