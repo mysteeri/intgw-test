@@ -144,7 +144,7 @@ Given I am in apipublisher
 	
 	Examples: 
 		|usertypePub|usertypeSP|usertypeAdmin|apiPublisherOne|apiName    |version|context      |prodEndpoint 						   |sandEndpoint						 |roleType 			  |ApiTier                              								 |LastName    |FirstName   |Email	          												 |appName     |Description           |AppStatusBeforeApprove|action 	  |AppStatusAfterApprove|AppTier  |Subscriptiontiers|subscriptionStatus|
-		|PUBLISHER  |SP        |ADMIN        |PUBLISHER      |telPayment |v1     |TELPayment   |http://172.26.76.70:8280/payment	   |http://172.26.76.70:8280/payment	 |Internal/publisher  |Unlimited,Default,Requestbased,Silver,Subscription,Gold,Premium,Bronze|TelcoTestAPP             |Telcotestapplication|viraj@ws02telco.com                         |TelcoPayment |AuXTestingAPP|INACTIVE              |Approve|ACTIVE               |Unlimited|Premium          |UNBLOCKED         |
+		|PUBLISHER  |SP        |ADMIN        |PUBLISHER      |telPayment |v1     |TELPayment   |http://172.26.76.70:8280/payment	   |http://172.26.76.70:8280/payment	 |Internal/publisher  |Unlimited,Default,Requestbased,Silver,Subscription,Gold,Premium,Bronze|TelcoTestAPP             |Telcotestapplication|viraj@ws02telco.com                         |TelcoPayment |AuXTestingAPP|INACTIVE              |Approve|ACTIVE               |Unlimited|Unlimited          |UNBLOCKED         |
 		
 		
 		

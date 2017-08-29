@@ -213,7 +213,7 @@ public class APISubscriptionSteps extends BasicTestObject {
 	@Then("^I should see the API \"([^\"]*)\" \"([^\"]*)\" status as \"([^\"]*)\" and Subscription Tier as \"([^\"]*)\"$")
 	public void i_should_see_the_API_status_as_and_Subscription_Tier_as(String arg1, String arg2, String arg3, String arg4) throws Throwable {
 		SubscriptionsPage subpage = new SubscriptionsPage(driver);
-		subpage.validateSubscriptionStatus(arg1+arg2, arg3);
+		subpage.validateSubscriptionStatus(arg1+" - "+arg2, arg3);
 		subpage.validateSubscriptionTier(arg1+arg2, arg4);
 	}
 
